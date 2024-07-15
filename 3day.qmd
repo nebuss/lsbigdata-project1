@@ -1,0 +1,68 @@
+---
+title: "LS 빅데이터 스쿨 3일차"
+author: "박수빈"
+format: html
+editor: visual
+jupyter: python3
+editor_options: 
+  chunk_output_type: console
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{python}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{python}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+==하이라이트 테스트 입니다 ==
+
+인라인 각주 ^\[이것은\ 인라인\ 각주입니다.\]^
+
+```{python}
+2+3
+```
+
+-   단축키 : \`Ctril + Alt + I\`
+
+백틱 뒤에 `{python}`을 붙여 주면 됨 ㅋㅋ
+
+백틱 뒤에 \`\``{python}`\`\`\`을 붙여 주면 됨 ㅋㅋ
+
+#\| echo true
+
+```{python}
+#| echo : true
+#| eval : false
+1+1
+```
+
+-   [x] 화분 물 주기
+
+-   [x] \[ -\] 우편함 확인
+
+-   [ ] 정처기 공부
+
+😃
+
+![](img/img1.jpg)
+
+문장안에 $5^2$를 넣어보자
+
+$$
+디스플레이 수식 1,2 ,3
+$$

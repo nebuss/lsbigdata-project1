@@ -1,54 +1,17 @@
-var1 = [1, 2, 3]
-var2 = [4, 5, 6]
-var1 + var2
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-str1 = 'Hello'
-str2 = 'World!'
-str1 +' ' + str2
+plt.clf()
+df = sns.load_dataset('titanic')
+df
 
-str1 + 1
+sns.countplot(data=df, x='sex')
+plt.show()
+plt.clf()
 
-a=10
-b=3.3
+sns.countplot(data=df , x='class', hue='alive')
+plt.show()
 
-print("a + b =", a + b) # 덧셈
-print("a - b =", a - b) # 뺄셈
-print("a * b =", a * b) # 곱셈
-print("a / b =", a / b) # 나눗셈
-print("a % b =", a % b) # 나머지
-print("a // b =", a // b) # 몫
-print("a ** b =", a ** b) # 거듭제곱
+import sklearn import metrics
+metrics.accuracy_score()
 
-a=10
-b=20
-
-print('a==b'm a==b)
-print("a != b", a!=b)
-print("a<b": a<b)
-print("a>b": a>b)
-
-c= ((2**4) + (12453 // 7)) % 8
-d = ((9**7) / 12 ) * (36452%253)
-c
-d
-c<d
-
-
-x=2
-y= ~x
-
-bin(x)
-bin(y)
-
-
-z=3
-bin(z)
-bin(~z)
-~z
-
-t=-3
-u=~t
-bin(u)
-u
-w
-test
