@@ -30,7 +30,7 @@ x[[True, True, False, False, True], 0]
 mat_b[:, 1] #벡터
 mat_b[:, (1,)] #행렬
 mat_b[:, [1]]
-mat_b[:, 1:2]
+mat_b[:, 1:2]nu
 
 mat_b[:, 1].reshape(-1,1) #이렇게 reshape 를 하면 밑에 행렬과같이 형태가 바뀜.
 
