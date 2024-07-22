@@ -1,0 +1,29 @@
+!pip install yaml
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+mpg = pd.read_csv('data/mpg.csv')
+
+df_mpg = mpg.groupby('drv', as_index = False) \
+            .agg(n = ('drv', 'count'))
+
+df_mpg             
+
+```
+
+# sns.barplot
+```{python}
+sns.barplot(data= df_mpg, x = 'drv', y='n')
+plt.show()
+```
+
+# sns.countplot
+
+```{python}
+sns.countplot(data= mpg, x='drv')
+plt.show()
+
+```
+
