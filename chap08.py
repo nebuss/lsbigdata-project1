@@ -38,3 +38,7 @@ plt.show()
 plt.clf()
 sns.countplot(data= mpg, x='drv')
 plt.show()
+
+
+import plotly.express as px
+px.scatter(data_frame =mpg, x = 'cty', y= 'hwy', color = 'drv')

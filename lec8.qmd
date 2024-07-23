@@ -13,6 +13,24 @@ df_mpg
 
 ```
 
+# seaborn 사용한 산점도
+```{python}
+plt.figure(figsize=(5, 4))
+sns.scatterplot(data = mpg, 
+                x = 'displ', y = 'hwy',
+                hue ='drv') \
+   .set(xlim =[3, 6], ylim=[10, 30])
+plt.show()
+
+```
+
+# plotly사용한 산점도
+```{python}
+import plotly.express as px
+px.scatter(data_frame =mpg, x = 'cty', y= 'hwy', color = 'drv')
+```
+
+
 # sns.barplot
 ```{python}
 sns.barplot(data= df_mpg, x = 'drv', y='n')
