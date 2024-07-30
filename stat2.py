@@ -158,7 +158,8 @@ bernoulli.rvs(0.3)
 bernoulli.rvs(0.3) + bernoulli.rvs(0.3) 
 binom.rvs(n=2, p=0.3, size=3) 
 
-# X ~ B(30, 0.26)따르는 확률변수에서 표본 30개를 뽑아보세요 -> 베르누이 확률변수를 30개 더한것이 이 이항분포.
+# X ~ B(30, 0.26)따르는 확률변수에서 표본 30개를 뽑아보세요 
+# -> 베르누이 확률변수를 30개 더한것이 이 이항분포.
 binom.rvs(n=30, p=0.26, size=30)  
 
 # 위의 이항분포의 기대값은?
@@ -193,10 +194,11 @@ plt.clf()
 
 
 
-# cdf : cumulative dist. function (누적확률분포 함수)
 # F_X(x) = X <= p
 binom.cdf(4, n=30, p=0.26)
 
+
+# cdf : cumulative dist. function (누적확률분포 함수)
 # p(4<= x < 18)일때 누적확률분포 구하기 
 binom.cdf(18, 30, 0.26) - binom.cdf(4, 30, 0.26)
 # p( 13< x < 20)일때 누적확률분포 구하기 => p(x<=19) - p(x<=13)
