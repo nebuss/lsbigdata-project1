@@ -62,7 +62,6 @@ plt.axvline(x=a, color='blue', linestyle='--', linewidth =1)
 plt.axvline(x=b, color='blue', linestyle='--', linewidth =1)
 
 # 파란벽돌(표본평균) 점찍기
-plt.scatter(blue_x, 0.002, s=10, zorder=10, color='blue')
  
 plt.show()
 plt.clf()

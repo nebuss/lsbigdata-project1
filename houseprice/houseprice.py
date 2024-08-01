@@ -68,6 +68,10 @@ house_df = pd.read_csv("./data/train.csv")
 house_df.columns
 
 my_df=house_df.groupby(['YearBuilt', 'OverallCond', 'GrLivArea'], as_index=False)\ 
+
+
+
+
          .agg(
            saleprice=('SalePrice', 'mean'))
          
@@ -91,3 +95,10 @@ predictions[['Id', 'SalePrice']].to_csv("./data/submission2.csv", index=False)
 
 # 결과 확인
 print(predictions[['Id', 'SalePrice']])
+
+
+
+
+
+
+
