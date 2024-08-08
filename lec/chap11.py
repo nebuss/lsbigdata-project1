@@ -188,3 +188,11 @@ my_map.save("seoul_map.html")
 # make_seouldf(0).iloc[:,1:3].mean()
 folium.Marker([37.583744, 126.983800], popup="종로구").add_to(my_map)
 my_map.save("seoul_map.html")
+
+
+
+
+
+
+
+

@@ -188,6 +188,28 @@ my_map.save("heatmap.html")
 
 
 
+--------  유나네 조 ------------
+import pandas as pd
+import folium
+house_df = pd.read_csv("houseprice/data/house_loc.csv")
 
+house_df = house_df[["Longitude", "Latitude"]]
+
+
+
+map_sig=folium.Map(location = [42.034, -93.642],
+                  zoom_start = 12, 
+                  tiles="cartodbpositron")
+
+marker_cluster = MarkerCluster().add_to(map_sig)
+
+for idx, row in house_df.iterrows():
+    folium.Marker(
+        location=[row["Latitude"], row["Longitude"]],
+        popup="집들,,"
+    ).add_to(marker_cluster)
+
+
+map_sig.save("map_ames.html")
 
 
