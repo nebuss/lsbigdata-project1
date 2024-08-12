@@ -1,0 +1,99 @@
+---
+title: "팔머펭귄 대쉬보드"
+author: "Subeen Park"
+format: 
+  dashboard:
+    logo: move.gif
+    nav-buttons:
+      - reddit
+      - icon: gitlab
+        href: https://github.com/nebuss/LSbigdata-project1
+---
+# {.sidebar}
+여기는 사이드바에 대한 내용이 들어갈 곳입니다.
+
+# Page1
+###  테스트1 {.tabset}
+
+```{python}
+import plotly.express as px
+from palmerpenguins import load_penguins
+
+# 데이터 로드
+penguins = load_penguins()
+
+from itables import show
+show(penguins, buttons = ['copy', 'excel', 'pdf'])
+
+
+```
+
+::: {.card title="My Title"}
+카드안에 ㄷ들어있는 텍스트입니다.
+![팔머펭귄](penguins.png)
+:::
+
+
+## Row {height=70%}
+
+```{python}
+import plotly.express as px
+import pandas as pd
+import numpy as np
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+penguins.head()
+
+fig = px.scatter(
+    penguins,
+    x="bill_length_mm",
+    y="bill_depth_mm",
+    color="species",
+    size_max=30,
+    
+)
+
+fig.update_layout(
+    title=dict(
+        text="<span style='color:blue;font-weight:bold;'>팔머펭귄</span>",  # HTML 태그를 문자열로 처리
+        x=0.5, 
+        xanchor='center',
+        yanchor='top'
+    )
+)
+```
+
+## Row {height=30%}
+
+```{python}
+```
+
+```{python}
+```
+
+
+# Page 2
+
+여기는 페이지 2
+
+## Row 
+
+```{python}
+
+value = 100
+spam_num=300
+comments=50
+
+```
+
+
+```{python}
+#| content: valuebox
+#| title: "Spam per day"
+dict(
+  icon = "trash",
+  color = "danger",
+  value = spam_num
+)
+```

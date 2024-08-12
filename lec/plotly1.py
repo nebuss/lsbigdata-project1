@@ -7,6 +7,9 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
+cwd = os.getcwd()
+cwd
+
 df_covid19_100 = pd.read_csv('data/df_covid19_100.csv')
 df_covid19_100.columns
 
@@ -115,7 +118,7 @@ fig.show()
   
   
 ------
-127p.
+#127p.
 
 import plotly.express as px
 !pip install palmerpenguins
@@ -132,11 +135,10 @@ fig = px.scatter(
     x="bill_length_mm",
     y="bill_depth_mm",
     color="species",
-    size= "size",
     size_max=30
 )
 
-fig.update_traces(marker=dict(size=20), opacity = 0.7))
+fig.update_traces(marker=dict(size=20), opacity = 0.7)
 
 # 레이아웃 업데이트
 # fig=px.scatter(penguins, x= "bill_length_mm", y= "bill_depth_mm", color="species", trendline="ols")
