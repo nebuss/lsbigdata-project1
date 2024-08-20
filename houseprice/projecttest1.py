@@ -6,8 +6,8 @@ import seaborn as sns
 
 
 ## 필요한 데이터 불러오기
-house_train=pd.read_csv("houseprice/data/house_loc.csv")
-
+house_train=pd.read_csv("houseprice/data/train.csv")
+house_train.columns
 
 
 want_col = ['MasVnrArea', 'ExterQual', 'ExterCond', 'Foundation', 'BsmtQual',
@@ -112,7 +112,7 @@ import folium
 from folium.plugins import HeatMap
 
 # 데이터 불러오기
-house_train = pd.read_csv("houseprice/data/house_loc.csv")
+house_train = pd.read_csv("houseprice/data/houseprice-loc.csv")
 
 house_train.info()
 house_loc= house_train.iloc[:, -2:]
@@ -177,14 +177,24 @@ for i in range(len(df)):
 # 지도 저장
 my_map.save('map_ames.html')
 
-# HeatMap 데이터 준비
-# heat_data = [[row['Latitude'], row['Longitude'], row['Sale_Price']] for index, row in df.iterrows()]
-# 
-# # HeatMap 추가
-# HeatMap(heat_data, radius=15).add_to(m)
+import pandas as pd
+import folium
+from folium.plugins import HeatMap
 
-# 지도 표시
-my_map.save("heatmap.html")
+# 데이터 불러오기
+house_train = pd.read_csv("houseprice/data/houseprice-loc.csv")
+
+# 지도 객체 생성
+m = folium.Map(location=[house_train['Latitude'].mean(), house_train['Longitude'].mean()], zoom_start=10)
+
+# HeatMap 데이터 준비
+heat_data = [[row['Latitude'], row['Longitude'], row['Sale_Price']] for index, row in house_train.iterrows()]
+
+# HeatMap 추가
+HeatMap(heat_data, radius=15).add_to(m)
+
+# 지도 저장
+m.save("heatmap_3.html")
 
 
 

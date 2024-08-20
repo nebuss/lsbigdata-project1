@@ -10,7 +10,24 @@ format:
         href: https://github.com/nebuss/LSbigdata-project1
 ---
 # {.sidebar}
-여기는 사이드바에 대한 내용이 들어갈 곳입니다.
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);">
+<h2 style="color: #002a66;">About</h2>
+ <img src="shark.jpeg" alt="Image" style="max-width: 100%; border-radius: 5px; margin-bottom: 15px;">
+  <li style="border-bottom: 1px solid #ddd; padding-bottom: 10px margin-bottom: 15px;"> 팀원: 강남규, 박수빈, 박한결, 백선아 </li>
+  <li style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;"> 프로젝트 주제: 캐글 Ames House Price 데이터 시각화</li>
+  <li style="padding-bottom: 10px; margin-bottom: 15px;"> 프로젝트 목표: 다양한 시각화를 통해 Ames시의 특징을 알아보고, 조건에 맞는 집을 선택한다.</li>
+  </div>
+  <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);">
+ <ul>
+  <h2 style="color: #002a66;">Data Source</h2>
+    <li style="border-bottom: 1px solid #ddd; padding-bottom: 10px"><a href="https://datausa.io/profile/geo/ames-ia/?healthDiversity=ageOption&measureOccupations=wage&race-income-income_geo=incomeRace0&raceEducation=pums5Race5&rentMortgage=rentOwn#race_and_ethnicity" style="color: #0056b3; text-decoration: none;">인종비율 및 직업별 소득데이터</a></li>
+    <li style="border-bottom: 1px solid #ddd; padding-bottom: 10px;margin-bottom: 15px;"><a href="https://github.com/OpenDataDE/State-zip-code-GeoJSON" style="color: #0056b3; text-decoration: none;">아이오와 json</a></li>
+    <li style="padding-bottom: 10px; margin-bottom: 15px;"><a href="https://docs.google.com/spreadsheets/d/1McH-oBzPZ8ewfyEl605wq-9b3gZHCIIBVbWHEHwNnIs/edit?gid=2006634661#gid=2006634661" style="color: #0056b3; text-decoration: none;">Ames House Price 데이터 코드북</a></li>
+ </ul>
+ 
+</div>
+
 
 # Page1
 ###  테스트1 {.tabset}
@@ -67,6 +84,7 @@ fig.update_layout(
 ## Row {height=30%}
 
 ```{python}
+
 ```
 
 ```{python}
@@ -97,3 +115,5 @@ dict(
   value = spam_num
 )
 ```
+
+
