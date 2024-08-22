@@ -1,0 +1,66 @@
+---
+title: "교과서 챕터 8"
+format: html
+jupyter: python3
+---
+
+## 빈도 막대 그래프 그리기
+
+데이터 불러오기
+
+```{python}
+import pandas as pd
+
+mpg=pd.read_csv("data/mpg.csv")
+```
+
+
+Seaborn 패키지 불러오기
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.express as px
+```
+
+### `scatter()` 사용하기
+
+* seaborn을 사용한 산점도
+
+```{python}
+sns.scatterplot(data=mpg, 
+                x="displ", y="hwy",
+                hue="drv") \
+   .set(xlim=[3, 6], ylim=[10, 30])
+```
+
+* plotly를 사용한 산점도
+
+```{python}
+px.scatter(data_frame=mpg,
+           x = "displ", y="hwy",
+           color="drv")
+```
+
+
+### `barplot()` 사용하기
+
+데이터 전처리하기
+
+```{python}
+df_mpg=mpg.groupby("drv", as_index=False) \
+          .agg(mean_hwy=('hwy', 'mean'))
+df_mpg
+```
+
+`barplot()` 사용해서 그래프 그리기
+
+```{python}
+sns.barplot(data=df_mpg.sort_values("mean_hwy"),
+            x = "drv", y = "mean_hwy",
+            hue = "drv")
+```
+
+### `countplot()` 사용하기
+
+
