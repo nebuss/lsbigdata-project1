@@ -1,5 +1,5 @@
 # 검증데이터, 훈련데이터 나눠서 성능 회귀 분석 측정
-# 범주형데이터 모두 더미코딩해서 회귀분석해보기
+# 모든 변수를 넣어서 회귀분석해보기
 # 필요한 패키지 불러오기
 import numpy as np
 import pandas as pd
@@ -11,21 +11,55 @@ house_train=pd.read_csv("./data/houseprice/train.csv")
 house_test=pd.read_csv("./data/houseprice/test.csv")
 sub_df=pd.read_csv("./data/houseprice/sample_submission.csv")
 
-## 이상치 탐색 (여기 넣으면 안됨!)
-# house_train=house_train.query("GrLivArea <= 4500")
+## Nan값 채우기
+## test셋 결측치 채우기
+house_train.isna().sum()
+house_test.isna().sum()
+
+
+
+# 각 숫자형 변수는 평균으로 채우기
+house_train = house_train.iloc[:, 1:] # id drop 
+quantitative = house_train.select_dtypes(include = [int, float])
+quantitative.isna().sum()
+quant_selected = quantitative.columns[quantitative.isna().sum() > 0] #빈 칼럼
+
+for col in quant_selected:
+    house_train[col].fillna(house_train[col].mean(), inplace=True)
+house_train[quant_selected].isna().sum()
+
+
+
+# 각 범주형 변수는 최빈값으로 채우기
+
+qualitaive = house_train.select_dtypes(include = [object])
+qualitaive.isna().sum()
+qual_selected = qualitaive.columns[qualitaive.isna().sum() > 0] #빈 칼럼
+
+for col in qual_selected:
+    house_train[col].fillna("unknown", inplace=True)
+house_train[qual_selected].isna().sum()
+
+
 
 house_train.shape
 house_test.shape
 train_n=len(house_train)
-
 # 통합 df 만들기 + 더미코딩
+
+
 df = pd.concat([house_train, house_test], ignore_index=True)
+# 데이터프레임에서 숫자가 아닌 컬럼을 선택
+df.select_dtypes(exclude=['number']).columns
+
 df = pd.get_dummies(
     df,
-    columns= ["Neighborhood"],
+    columns= df.select_dtypes(include=[object]).columns,
     drop_first=True
     )
-df
+df.info()
+
+
 
 # train / test 데이터셋
 train_df=df.iloc[:train_n,]
@@ -43,21 +77,16 @@ train_df=train_df.drop(val_index) # 70%
 ## 이상치 탐색
 train_df=train_df.query("GrLivArea <= 4500")
 
-# x, y 나누기
-# regex (Regular Expression, 정규방정식)
-# ^ 시작을 의미, $ 끝남을 의미, | or를 의미
-selected_columns=train_df.filter(regex='^GrLivArea$|^GarageArea$|^Neighborhood_').columns
-
 ## train
-train_x=train_df[selected_columns]
+train_x=train_df.drop("SalePrice", axis=1)
 train_y=train_df["SalePrice"]
 
 ## valid
-valid_x=valid_df[selected_columns]
+valid_x=valid_df.drop("SalePrice", axis=1)
 valid_y=valid_df["SalePrice"]
 
 ## test
-test_x=test_df[selected_columns]
+test_x=test_df.drop("SalePrice", axis=1)
 
 # 선형 회귀 모델 생성
 model = LinearRegression()
