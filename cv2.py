@@ -24,24 +24,33 @@ X_poly=pd.DataFrame(
 )
 
 # 교차 검증 설정
-kf = KFold(n_splits=3, shuffle=True, random_state=2024)
+kf = KFold(n_splits=5, shuffle=True, random_state=2024)
 
-# 알파 값 설정
-alpha_values = np.arange(0, 10, 0.01)
+def rmse(model):
+    score = np.sqrt(-cross_val_score(model, X_poly, y, cv = kf,
+                                     n_jobs=-1, scoring = "neg_mean_squared_error").mean())
+    return(score)
+
+lasso = Lasso(alpha=0.01)
+rmse(lasso)
 
 # 각 알파 값에 대한 교차 검증 점수 저장
-mean_scores = []
+alpha_values = np.arange(0, 10, 0.01)
+mean_scores = np.zeros(len(alpha_values))
 
+k=0
 for alpha in alpha_values:
-    lasso = Lasso(alpha=alpha, max_iter=5000)
-    scores = cross_val_score(lasso, X_poly, y, cv=kf, scoring='neg_mean_squared_error')
-    mean_scores.append(np.mean(scores))
+    lasso = Lasso(alpha=alpha)
+    mean_scores[k] = rmse(lasso)
+    k += 1
 
 # 결과를 DataFrame으로 저장
 df = pd.DataFrame({
     'lambda': alpha_values,
     'validation_error': mean_scores
 })
+
+df
 
 # 결과 시각화
 plt.plot(df['lambda'], df['validation_error'], label='Validation Error', color='red')
