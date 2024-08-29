@@ -64,3 +64,27 @@ for i in range(100):
     x, y= np.array([x, y])- lstep * np.array([2 *x -6, 2*y-8])    
     plt.scatter(float(x), float(y), color=random_color, s=50)
 print(x, y)
+
+
+#=========================회귀 직선 베타 찾기
+b0 = np.linspace(-10, 10, 400)
+b1 = np.linspace(-10, 10, 400)
+b0, b1 = np.meshgrid(b0, b1)
+
+# 함수 f(x, y)를 계산합니다.
+z = (1-(b0+b1))**2 + (4-(b0+2*b1))**2 + (1.5-(b0+3*b1))**2 + (5-(b0+4*b1))**2
+
+plt.figure()
+cp = plt.contour(b0, b1, z, levels=200)  # levels는 등고선의 개수를 조절합니다.
+plt.colorbar(cp)  # 등고선 레벨 값에 대한 컬러바를 추가합니다.
+
+# f(b0, b1) = (1-(b0+b1))**2 + (4-(b0+2*b1))**2 + (1.5-(b0+3*b1))**2 + (5-(b0+4*b1))**@
+b0 = 10
+b1 = 10
+delta = 0.01
+for i in range(1000):
+    gradient_b0 = 8*b0 + 20*b1 -23
+    gradient_b1 = 20*b0 + 60*b1 -67
+    b0, b1 = np.array([b0, b1]) - delta * np.array([gradient_b0, gradient_b1])
+    plt.scatter(b0, b1, color = 'red', s=10)
+print(b0, b1)
