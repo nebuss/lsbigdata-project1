@@ -88,3 +88,20 @@ for i in range(1000):
     b0, b1 = np.array([b0, b1]) - delta * np.array([gradient_b0, gradient_b1])
     plt.scatter(b0, b1, color = 'red', s=10)
 print(b0, b1)
+
+
+
+# =========모델 fit으로 베타 구하기
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+df = pd.DataFrame({
+    'x':np.array([1,2,3,4]),
+    'y' : np.array([1, 4, 1.5, 5])
+})
+
+model = LinearRegression()
+model.fit(df[['x']], df[['y']])
+
+model.intercept_
+model.coef_
