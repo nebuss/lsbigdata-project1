@@ -6,9 +6,9 @@ from sklearn.model_selection import cross_val_score, KFold
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 
 # 데이터 로드
-berry_train = pd.read_csv("blueberry/data/train.csv")
-berry_test= pd.read_csv("blueberry/data/test.csv")
-sub_df = pd.read_csv("blueberry/data/sample_submission.csv")
+berry_train = pd.read_csv("./data/blueberry/train.csv")
+berry_test = pd.read_csv("./data/blueberry/test.csv")
+sub_df = pd.read_csv("./data/blueberry/sample_submission.csv")
 
 # 데이터 전처리
 X = berry_train.drop(["yield", "id"], axis=1)
