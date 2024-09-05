@@ -46,7 +46,7 @@ show(penguins, buttons = ['copy', 'excel', 'pdf'])
 ```
 
 ::: {.card title="My Title"}
-카드안에 ㄷ들어있는 텍스트입니다.
+카드안에 들어있는 텍스트입니다.
 ![팔머펭귄](penguins.png)
 :::
 
