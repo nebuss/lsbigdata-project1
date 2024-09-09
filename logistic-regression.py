@@ -74,23 +74,35 @@ admission_data['gender'] = admission_data['gender'].astype('category')
 model = sm.formula.logit("admit ~ gre + gpa + rank + gender", data=admission_data).fit()
 
 print(model.summary())
-입학할 확률의 오즈가 
+# 입학할 확률의 오즈가 
 np.exp(0.7753)
 
+# 합격 확률을 예측해보자! 
+# -3.4075 + -0.0576 * x1 + 0.0023 * x2 + 0.7753 * x3 -0.5614 * x4 
+# 여학생 
+# gre : 500
+# gpa : 3.5
+# rank : 2
+log_odds = -3.4075 + -0.0576 * 0 + 0.0023 * 500 + 0.7753 * 3.5 -0.5614*2
+odds = np.exp(log_odds)  # 오즈: 0.513
+p_hat = odds / (odds + 1) # 합격확률 0.34
 
-# 여학생, gpa: 3.5, gre:500, rank:2
-intercept = -3.4075
-rank_coef = -0.5614
-gre_coef = 0.0023
-gpa_coef = 0.7753
-gre = 500
-gpa = 3.5
-rank= 2  # rank가 2일 때
+# 
+log_odds = -3.4075 + -0.0576 * 0 + 0.0023 * 500 + 0.7753 * 4.5 -0.5614*2
+odds = np.exp(logg_odds)  # 오즈1.115
+p_hat = odds / (odds + 1) # 합격확률: 0.527
 
-# log-odds 계산
-log_odds = intercept + (rank_coef * rank) + (gre_coef * gre) + (gpa_coef * gpa)
+# 여학생 
+# gre : 450
+# gpa : 3
+# rank : 2
+#일때 합격확률과 오즈는?
+log_odds = -3.4075 + -0.0576 * 0 + 0.0023 * 450 + 0.7753 * 3 -0.5614*2
+odds = np.exp(log_odds) # 오즈:0.3105
+p_hat = odds / (odds + 1) # 합격확률: 0.2369
 
-# 합격 확률 계산
-probability = 1 / (1 + np.exp(-log_odds))
+from scipy.stats import norm
 
-print(f"합격 확률: {probability:.4f}")
+(1-norm.cdf(2.123, loc=0, scale=1)) * 2
+
+0.25+1.96*(2/np.sqrt(17))
