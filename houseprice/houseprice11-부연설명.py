@@ -177,3 +177,48 @@ sub_df
 
 # # csv 파일로 내보내기
 # sub_df.to_csv("./data/houseprice/sample_submission11.csv", index=False)
+
+
+## 배깅 기법: 부트스트랩 샘플(복원 추출로 생성된 서브샘플)을 사용해 각각 모델을 학습시키고, 그 모델들의 예측을 평균하거나 다수결 투표를 통해 최종 예측을 만드는 앙상블 기법
+
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import GridSearchCV
+
+train_x.shape[0]
+btstrap_index1 = np.random.choice(np.arange(1458), 1458, replace =True)
+bts_train_x1 = train_x.iloc[btstrap_index1, : ]
+bts_train_y = np.array(train_y)[btstrap_index1] # train_x에 대응되는 train_y
+# 서브데이터셋을 만들기 위해 인덱스를 만들었어요 복원추출을 하려고 replace=True를 썼다
+
+btstrap_index2 = np.random.choice(np.arange(1458), 1458, replace =True)
+bts_train_x2=train_x.iloc[btstrap_index2, : ]
+bts_train_y2 = np.array(train_y)[btstrap_index2] 
+
+model = DecisionTreeRegressor(random_state=42)
+param_grid={
+    'max_depth': np.arange(7, 20, 1),
+    'min_samples_split': [20, 10, 5],
+}
+
+grid_search=GridSearchCV(
+    estimator=rf_model,
+    param_grid=param_grid,
+    scoring='neg_mean_squared_error',
+    cv=5
+)
+
+grid_search.fit(bts_train_x1 , bts_train_y) # bts1으로 찾기
+grid_search.best_params_
+bts_model1=grid_search.best_estimator_ # 그리드서치를 통해서 best파라미터를 가지고있는 모델을 찾음.
+bts_model1
+
+
+grid_search.fit(bts_train_x2 , bts_train_y2) # bts2으로 찾기
+grid_search.best_params_
+bts_model2=grid_search.best_estimator_ 
+
+bts1_y = bts_model1.predict(train_x) # 학습할때와 다르게 train_x 를 넣음.
+bts2_y = bts_model1.predict(train_x) # bst2 모델이 예측한  train_y
+# 랜덤포레스트 하나 모델만 사용했을 때는 test_x를 넣지만, 이것을 스택킹에 다시 넣기 위해서는 train_x를 넣는다
+(bts1_y +bts2_y) / 2  # 랜덤포레스트로 예측한 y값
+
